@@ -48,19 +48,19 @@
 #define PARSE_ERROR	WOLFSSL_PARSE_ERROR
 
 /* Remap unused enums from the OpenSSL compatibility layer to avoid conflicts */
-#define ASN1_BOOLEAN         REMAP_ASN1_BOOLEAN
 #define ASN1_OID             REMAP_ASN1_OID
 #define ASN1_INTEGER         REMAP_ASN1_INTEGER
 #define ASN1_BIT_STRING      REMAP_ASN1_BIT_STRING
-#define ASN1_IA5STRING       REMAP_ASN1_IA5STRING
-#define ASN1_OCTET_STRING    REMAP_ASN1_OCTET_STRING
-#define ASN1_UTCTIME         REMAP_ASN1_UTCTIME
-#define ASN1_GENERALIZEDTIME REMAP_ASN1_GENERALIZEDTIME
 
 #ifndef WOLFSSL_USER_SETTINGS
 	#include <wolfssl/options.h>
 #endif
 #include <wolfssl/ssl.h>
+
+#if  defined(HAVE_FIPS) && \
+    (defined(HAVE_FIPS_VERSION) && FIPS_VERSION_GE(2,0))
+    #include <wolfssl/wolfcrypt/fips_test.h>
+#endif
 
 /* Special type used to handle EdDSA keys depending on config options */
 #if defined(HAVE_ED25519) || defined(HAVE_ED448)

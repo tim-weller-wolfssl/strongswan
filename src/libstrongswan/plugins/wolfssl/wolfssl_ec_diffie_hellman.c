@@ -210,11 +210,14 @@ static bool compute_shared_key(private_wolfssl_ec_diffie_hellman_t *this)
 	{
 		return FALSE;
 	}
+    #if !defined(HAVE_FIPS) || \
+        (defined(HAVE_FIPS_VERSION) && FIPS_VERSION_GE(5,2))
 	if (wc_ecc_set_rng(&this->key, &rng) != 0)
 	{
 		wc_FreeRng(&rng);
 		return FALSE;
 	}
+    #endif
 #endif
 
 	this->shared_secret = chunk_alloc(this->keysize);

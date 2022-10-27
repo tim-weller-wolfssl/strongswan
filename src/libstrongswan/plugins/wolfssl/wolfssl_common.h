@@ -71,6 +71,11 @@
 #include <wolfssl/ssl.h>
 #endif
 
+#if  defined(HAVE_FIPS) && \
+    (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2))
+    #include <wolfssl/wolfcrypt/fips_test.h>
+#endif
+
 /* Special type used to handle EdDSA keys depending on config options */
 #if defined(HAVE_ED25519) || defined(HAVE_ED448)
 #ifdef HAVE_ED25519

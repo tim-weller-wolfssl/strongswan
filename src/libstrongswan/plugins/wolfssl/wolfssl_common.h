@@ -67,9 +67,9 @@
 #ifndef WOLFSSL_USER_SETTINGS
 	#include <wolfssl/options.h>
 #endif
-//#ifdef WOLFSSL_COMMON_INC_SSL_H
+#ifdef WOLFSSL_COMMON_INC_SSL_H
 #include <wolfssl/ssl.h>
-//#endif
+#endif
 
 /* Special type used to handle EdDSA keys depending on config options */
 #if defined(HAVE_ED25519) || defined(HAVE_ED448)

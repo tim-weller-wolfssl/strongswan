@@ -47,6 +47,7 @@
 /* PARSE_ERROR is an enum entry in wolfSSL - not used in this plugin */
 #define PARSE_ERROR	WOLFSSL_PARSE_ERROR
 
+#if 0 // TWW - original
 /* Remap unused enums from the OpenSSL compatibility layer to avoid conflicts */
 #define ASN1_BOOLEAN         REMAP_ASN1_BOOLEAN
 #define ASN1_OID             REMAP_ASN1_OID
@@ -56,11 +57,19 @@
 #define ASN1_OCTET_STRING    REMAP_ASN1_OCTET_STRING
 #define ASN1_UTCTIME         REMAP_ASN1_UTCTIME
 #define ASN1_GENERALIZEDTIME REMAP_ASN1_GENERALIZEDTIME
+#endif
+
+// TWW - remove OpenSSL mappings...
+#undef OPENSSL_ALL
+#undef OPENSSL_EXTRA
+#undef OPENSSL_EXTRA_X509_SMALL
 
 #ifndef WOLFSSL_USER_SETTINGS
 	#include <wolfssl/options.h>
 #endif
+//#ifdef WOLFSSL_COMMON_INC_SSL_H
 #include <wolfssl/ssl.h>
+//#endif
 
 /* Special type used to handle EdDSA keys depending on config options */
 #if defined(HAVE_ED25519) || defined(HAVE_ED448)
@@ -82,6 +91,7 @@ typedef union {
 
 #undef PARSE_ERROR
 
+#if 0 // TWW - original
 #undef ASN1_BOOLEAN
 #undef ASN1_OID
 #undef ASN1_INTEGER
@@ -90,6 +100,7 @@ typedef union {
 #undef ASN1_OCTET_STRING
 #undef ASN1_UTCTIME
 #undef ASN1_GENERALIZEDTIME
+#endif // TWW
 
 /* Eliminate macro conflicts */
 #undef RNG

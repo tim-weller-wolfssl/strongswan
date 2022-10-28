@@ -67,7 +67,7 @@
 #undef OPENSSL_ALL
 #undef OPENSSL_EXTRA
 #undef OPENSSL_EXTRA_X509_SMALL
-#undef OPENSSL_COEXIST
+//#undef OPENSSL_COEXIST
 
 #ifdef WOLFSSL_COMMON_INC_SSL_H
 #include <wolfssl/ssl.h>

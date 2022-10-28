@@ -59,15 +59,16 @@
 #define ASN1_GENERALIZEDTIME REMAP_ASN1_GENERALIZEDTIME
 #endif
 
+#ifndef WOLFSSL_USER_SETTINGS
+	#include <wolfssl/options.h>
+#endif
+
 // TWW - remove OpenSSL mappings...
 #undef OPENSSL_ALL
 #undef OPENSSL_EXTRA
 #undef OPENSSL_EXTRA_X509_SMALL
 #undef OPENSSL_COEXIST
 
-#ifndef WOLFSSL_USER_SETTINGS
-	#include <wolfssl/options.h>
-#endif
 //#ifdef WOLFSSL_COMMON_INC_SSL_H
 #include <wolfssl/ssl.h>
 //#endif

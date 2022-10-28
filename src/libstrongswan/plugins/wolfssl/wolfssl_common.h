@@ -72,9 +72,10 @@
 // TWW - TRY: disable openssl-compat layer using header defines...
 #define WOLFSSL_OPENSSL_H_
 
-//#ifdef WOLFSSL_COMMON_INC_SSL_H
+// TWW - TRY: conditionally including wolfssl/ssl.h only for files that need it to avoid old wolf ASN1 conflict
+#ifdef WOLFSSL_COMMON_INC_SSL_H
 #include <wolfssl/ssl.h>
-//#endif
+#endif
 
 #if  defined(HAVE_FIPS) && \
     (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2))

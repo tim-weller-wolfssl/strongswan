@@ -67,9 +67,9 @@
 #ifndef WOLFSSL_USER_SETTINGS
 	#include <wolfssl/options.h>
 #endif
-#ifdef WOLFSSL_COMMON_INC_SSL_H
+//#ifdef WOLFSSL_COMMON_INC_SSL_H
 #include <wolfssl/ssl.h>
-#endif
+//#endif
 
 #if  defined(HAVE_FIPS) && \
     (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2))

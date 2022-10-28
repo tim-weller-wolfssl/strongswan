@@ -63,15 +63,15 @@
 	#include <wolfssl/options.h>
 #endif
 
-// TWW - remove OpenSSL mappings...
+// TWW - remove OpenSSL mappings...doesn't work,... vector failure...
 //#undef OPENSSL_ALL
 //#undef OPENSSL_EXTRA
 //#undef OPENSSL_EXTRA_X509_SMALL
 //#undef OPENSSL_COEXIST
 
-#ifdef WOLFSSL_COMMON_INC_SSL_H
+//#ifdef WOLFSSL_COMMON_INC_SSL_H
 #include <wolfssl/ssl.h>
-#endif
+//#endif
 
 #if  defined(HAVE_FIPS) && \
     (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2))

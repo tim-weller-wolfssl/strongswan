@@ -63,11 +63,14 @@
 	#include <wolfssl/options.h>
 #endif
 
-// TWW - remove OpenSSL mappings...doesn't work,... vector failure...
+// TWW - TRY: disable openssl-compat layer using config options...doesn't work,... ss-test vector failure...
 //#undef OPENSSL_ALL
 //#undef OPENSSL_EXTRA
 //#undef OPENSSL_EXTRA_X509_SMALL
 //#undef OPENSSL_COEXIST
+
+// TWW - TRY: disable openssl-compat layer using header defines...
+#define WOLFSSL_OPENSSL_H_
 
 //#ifdef WOLFSSL_COMMON_INC_SSL_H
 #include <wolfssl/ssl.h>

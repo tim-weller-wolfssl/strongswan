@@ -63,6 +63,12 @@
 	#include <wolfssl/options.h>
 #endif
 
+#if defined(ECC_TIMING_RESISTANT) && \
+    (!defined(HAVE_FIPS) || \
+     (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 5)))
+    #define USE_RNG_FOR_TIMING_RESISTANCE
+#endif
+
 // TWW - TRY: disable openssl-compat layer using config options...doesn't work,... ss-test vector failure...
 //#undef OPENSSL_ALL
 //#undef OPENSSL_EXTRA

@@ -203,21 +203,19 @@ METHOD(key_exchange_t, set_private_key, bool,
 static bool compute_shared_key(private_wolfssl_ec_diffie_hellman_t *this)
 {
 	word32 len;
-#ifdef ECC_TIMING_RESISTANT
+#ifdef USE_RNG_FOR_TIMING_RESISTANCE
 	WC_RNG rng;
 
 	if (wc_InitRng(&rng) != 0)
 	{
 		return FALSE;
 	}
-    #if !defined(HAVE_FIPS) || \
-        (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 5))
+
 	if (wc_ecc_set_rng(&this->key, &rng) != 0)
 	{
 		wc_FreeRng(&rng);
 		return FALSE;
 	}
-    #endif
 #endif
 
 	this->shared_secret = chunk_alloc(this->keysize);

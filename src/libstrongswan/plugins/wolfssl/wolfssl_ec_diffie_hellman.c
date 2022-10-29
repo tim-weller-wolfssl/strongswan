@@ -226,13 +226,13 @@ static bool compute_shared_key(private_wolfssl_ec_diffie_hellman_t *this)
 	{
 		DBG1(DBG_LIB, "ECDH shared secret computation failed");
 		chunk_clear(&this->shared_secret);
-#ifdef ECC_TIMING_RESISTANT
+#ifdef USE_RNG_FOR_TIMING_RESISTANCE
 		wc_FreeRng(&rng);
 #endif
 		return FALSE;
 	}
 	this->shared_secret.len = len;
-#ifdef ECC_TIMING_RESISTANT
+#ifdef USE_RNG_FOR_TIMING_RESISTANCE
 	wc_FreeRng(&rng);
 #endif
 	return TRUE;

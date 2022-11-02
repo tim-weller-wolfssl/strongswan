@@ -47,18 +47,6 @@
 /* PARSE_ERROR is an enum entry in wolfSSL - not used in this plugin */
 #define PARSE_ERROR	WOLFSSL_PARSE_ERROR
 
-#if 0 // TWW - original
-/* Remap unused enums from the OpenSSL compatibility layer to avoid conflicts */
-#define ASN1_BOOLEAN         REMAP_ASN1_BOOLEAN
-#define ASN1_OID             REMAP_ASN1_OID
-#define ASN1_INTEGER         REMAP_ASN1_INTEGER
-#define ASN1_BIT_STRING      REMAP_ASN1_BIT_STRING
-#define ASN1_IA5STRING       REMAP_ASN1_IA5STRING
-#define ASN1_OCTET_STRING    REMAP_ASN1_OCTET_STRING
-#define ASN1_UTCTIME         REMAP_ASN1_UTCTIME
-#define ASN1_GENERALIZEDTIME REMAP_ASN1_GENERALIZEDTIME
-#endif
-
 #ifndef WOLFSSL_USER_SETTINGS
 	#include <wolfssl/options.h>
 #endif
@@ -69,16 +57,12 @@
     #define USE_RNG_FOR_TIMING_RESISTANCE
 #endif
 
-// TWW - TRY: disable openssl-compat layer using config options...doesn't work,... ss-test vector failure...
-//#undef OPENSSL_ALL
-//#undef OPENSSL_EXTRA
-//#undef OPENSSL_EXTRA_X509_SMALL
-//#undef OPENSSL_COEXIST
-
-// TWW - TRY: disable openssl-compat layer using header defines...
+/* Disable inclusion of the wolfSSL OpenSSL compatibility layer header (if
+ * configured) as it is not used by the plugin and causes conflicts */
 #define WOLFSSL_OPENSSL_H_
 
-// TWW - TRY: conditionally including wolfssl/ssl.h only for files that need it to avoid old wolf ASN1 conflict
+/* Conditionally include wolfssl/ssl.h to avoid conflicts between the wolfSSL
+ * and strongSwan ASN1 values in older wolfSSL versions */
 #ifdef WOLFSSL_COMMON_INC_SSL_H
 #include <wolfssl/ssl.h>
 #endif
@@ -107,17 +91,6 @@ typedef union {
 #endif /* HAVE_ED25519 || HAVE_ED448 */
 
 #undef PARSE_ERROR
-
-#if 0 // TWW - original
-#undef ASN1_BOOLEAN
-#undef ASN1_OID
-#undef ASN1_INTEGER
-#undef ASN1_BIT_STRING
-#undef ASN1_IA5STRING
-#undef ASN1_OCTET_STRING
-#undef ASN1_UTCTIME
-#undef ASN1_GENERALIZEDTIME
-#endif // TWW
 
 /* Eliminate macro conflicts */
 #undef RNG

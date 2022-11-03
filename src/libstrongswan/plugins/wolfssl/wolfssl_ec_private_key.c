@@ -133,8 +133,6 @@ static bool build_der_signature(private_wolfssl_ec_private_key_t *this,
 								enum wc_HashType hash, chunk_t data,
 								chunk_t *signature)
 {
-#if 1 // TWW - testing
-
     chunk_t dgst = chunk_empty;
     bool success = FALSE;
     word32 len;
@@ -169,30 +167,6 @@ static bool build_der_signature(private_wolfssl_ec_private_key_t *this,
 #endif
 
     return success;
-
-#else // TWW - original
-    chunk_t dgst = chunk_empty;
-    bool success = FALSE;
-    word32 len;
-
-    if (wolfssl_hash_chunk(hash, data, &dgst))
-    {
-        *signature = chunk_alloc(wc_ecc_sig_size(&this->ec));
-        len = signature->len;
-        if (wc_ecc_sign_hash(dgst.ptr, dgst.len, signature->ptr, &len,
-                               &this->rng, &this->ec) == 0)
-        {
-            signature->len = len;
-            success = TRUE;
-        }
-        else
-        {
-            chunk_free(signature);
-        }
-    }
-    chunk_free(&dgst);
-    return success;
-#endif // TWW
 }
 
 METHOD(private_key_t, sign, bool,

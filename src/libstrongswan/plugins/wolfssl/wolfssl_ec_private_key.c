@@ -133,40 +133,40 @@ static bool build_der_signature(private_wolfssl_ec_private_key_t *this,
 								enum wc_HashType hash, chunk_t data,
 								chunk_t *signature)
 {
-    chunk_t dgst = chunk_empty;
-    bool success = FALSE;
-    word32 len;
+	chunk_t dgst = chunk_empty;
+	bool success = FALSE;
+	word32 len;
 #ifdef USE_RNG_FOR_TIMING_RESISTANCE
-    WC_RNG rng;
+	WC_RNG rng;
 
-    if (wc_InitRng(&rng) == 0)
-    {
-        if (wc_ecc_set_rng(&this->ec, &rng) == 0)
-        {
+	if (wc_InitRng(&rng) == 0)
+	{
+		if (wc_ecc_set_rng(&this->ec, &rng) == 0)
+		{
 #endif
-            if (wolfssl_hash_chunk(hash, data, &dgst))
-            {
-                *signature = chunk_alloc(wc_ecc_sig_size(&this->ec));
-                len = signature->len;
-                if (wc_ecc_sign_hash(dgst.ptr, dgst.len, signature->ptr, &len,
-                                       &this->rng, &this->ec) == 0)
-                {
-                    signature->len = len;
-                    success = TRUE;
-                }
-                else
-                {
-                    chunk_free(signature);
-                }
-            }
-            chunk_free(&dgst);
+			if (wolfssl_hash_chunk(hash, data, &dgst))
+			{
+				*signature = chunk_alloc(wc_ecc_sig_size(&this->ec));
+				len = signature->len;
+				if (wc_ecc_sign_hash(dgst.ptr, dgst.len, signature->ptr, &len,
+										&this->rng, &this->ec) == 0)
+				{
+					signature->len = len;
+					success = TRUE;
+				}
+				else
+				{
+					chunk_free(signature);
+				}
+			}
+			chunk_free(&dgst);
 #ifdef USE_RNG_FOR_TIMING_RESISTANCE
-        }
-        wc_FreeRng(&rng);
-    }
+		}
+		wc_FreeRng(&rng);
+	}
 #endif
 
-    return success;
+	return success;
 }
 
 METHOD(private_key_t, sign, bool,

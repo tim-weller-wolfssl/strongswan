@@ -51,12 +51,6 @@
 	#include <wolfssl/options.h>
 #endif
 
-#if defined(ECC_TIMING_RESISTANT) && \
-    (!defined(HAVE_FIPS) || \
-     (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 5)))
-    #define USE_RNG_FOR_TIMING_RESISTANCE
-#endif
-
 /* Disable inclusion of the wolfSSL OpenSSL compatibility layer header (if
  * configured) as it is not used by the plugin and causes conflicts */
 #define WOLFSSL_OPENSSL_H_

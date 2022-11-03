@@ -31,6 +31,12 @@
 
 #include <utils/debug.h>
 
+#if defined(ECC_TIMING_RESISTANT) && \
+    (!defined(HAVE_FIPS) || \
+     (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 5)))
+    #define USE_RNG_FOR_TIMING_RESISTANCE
+#endif
+
 typedef struct private_wolfssl_ec_diffie_hellman_t private_wolfssl_ec_diffie_hellman_t;
 
 /**

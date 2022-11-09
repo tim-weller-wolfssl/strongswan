@@ -57,9 +57,10 @@
 
 /* Conditionally include wolfssl/ssl.h to avoid conflicts between the wolfSSL
  * and strongSwan ASN1 values in older wolfSSL versions */
-#ifdef WOLFSSL_COMMON_INC_SSL_H
-#include <wolfssl/ssl.h>
-#endif
+//#ifdef WOLFSSL_COMMON_INC_SSL_H
+//#include <wolfssl/ssl.h>
+//#endif
+// TWW ^^^ changes...
 
 #if  defined(HAVE_FIPS) && \
     (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2))
